@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import QuotesList from "./QuotesList"
-import QuotesForm from "./QuotesForm"
+//import QuotesForm from "./QuotesForm"
+import AddQuotes from './AddQuotes';
 
 
 function QuotesContainer(props) {
@@ -22,6 +23,19 @@ function QuotesContainer(props) {
        setQuotes(result)
     }
 
+    const editItem = (formData) => {
+        const result = quotes.map(quote => {
+            if(quote.id === formData.id){
+                return {...quote, ...formData}
+            }
+            else{
+                return {...quote}
+            }
+        })
+
+        setQuotes(result)
+    }
+
     const removeItem = (id) => {
        const result = quotes.filter(quote => {
            return quote.id !== id
@@ -32,8 +46,8 @@ function QuotesContainer(props) {
     return (
         <div>
             <h1>quotes container</h1>
-            <QuotesList quotes={quotes} removeItem={removeItem} />
-            <QuotesForm addItem={addItem} />
+            <QuotesList quotes={quotes} removeItem={removeItem} editItem={editItem} />
+            <AddQuotes addItem={addItem} />
         </div>
     );
 }

@@ -2,20 +2,26 @@ import React, {useState} from 'react';
 
 function QuotesForm(props) {
 
-    const { addItem }  = props
+    const {id: srlNo, name: author, body: statement, handleToggle }  = props
 
-    const [name, setName] = useState("")
-    const [body, setBody] = useState("")
+    const { formSubmission }  = props
+
+    const [id, setId] = useState(srlNo ? srlNo : Number(new Date()))
+    const [name, setName] = useState(author ? author : "")
+    const [body, setBody] = useState(statement ? statement : "")
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const formData = {
-            id: Number(new Date()),
+            id: id,
             name: name,
             body: body
         }  
-        addItem(formData)
+        formSubmission(formData)
+        if(handleToggle){
+            handleToggle()
+        }
         setName("")
         setBody("")
     }
