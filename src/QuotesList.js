@@ -3,7 +3,7 @@ import QuotesItem from "./QuotesItem"
 
 
 function QuotesList(props) {
-    const { quotes }  = props
+    const { quotes, removeItem }  = props
     console.log("quotes data", quotes.length)
     return (
         <div>
@@ -14,7 +14,7 @@ function QuotesList(props) {
                <h1>My Quotes -  {quotes.length}</h1>
                 {
                     quotes.map(quote => {
-                        return <QuotesItem key={quote.id} {...quote} />
+                        return <QuotesItem key={quote.id} {...quote} removeItem={removeItem} />
                     })
                 }
                </div>
